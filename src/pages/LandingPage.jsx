@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const productos = [
   {
@@ -43,9 +44,12 @@ const LandingPage = () => {
             ¡Descubre, personaliza y comparte tu creatividad!
           </span>
         </p>
-        <a href="#productos" className="bg-green-700 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-bold shadow-lg hover:bg-green-800 hover:shadow-xl transform hover:scale-105 transition-all duration-200 animate-pulse-gentle">
+        <Link
+          to="/catalog"
+          className="bg-green-700 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-bold shadow-lg hover:bg-green-800 hover:shadow-xl transform hover:scale-105 transition-all duration-200 animate-pulse-gentle"
+        >
           Ver catálogo
-        </a>
+        </Link>
         <div className="mt-8 sm:mt-12 flex space-x-6 sm:space-x-8 opacity-60">
           <div className="text-green-600 text-3xl sm:text-4xl animate-float">🌱</div>
           <div className="text-blue-600 text-3xl sm:text-4xl animate-float-delayed">💧</div>
