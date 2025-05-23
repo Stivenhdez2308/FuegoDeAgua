@@ -16,13 +16,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white/95 shadow-sm border-b border-green-100 sticky top-0 z-50 w-full">
-      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between px-2 sm:px-6 py-2 sm:py-3 gap-2">
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between px-2 sm:px-6 py-2 sm:py-3 gap-2 relative">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 min-w-[44px]">
+        <Link to="/" className="flex items-center gap-2 min-w-[44px] z-10">
           <img src="/Logo.jpg" alt="Logo Fuego de Agua" className="w-10 h-10 rounded-full object-cover border-2 border-green-200 shadow-sm" />
         </Link>
-        {/* Links */}
-        <div className="flex-1 flex flex-row justify-center items-center gap-1 sm:gap-4">
+        {/* Links centrados */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row justify-center items-center gap-1 sm:gap-4">
           <NavLinkItem to="/" label="Inicio" location={location} />
           <NavLinkItem to="/catalog" label="Catálogo" location={location} />
           {user && <NavLinkItem to="/customizer" label="Personaliza" location={location} />}
@@ -31,7 +31,7 @@ const Navbar = () => {
           {user && <NavLinkItem to="/profile" label="Perfil" location={location} />}
         </div>
         {/* Auth button */}
-        <div className="flex items-center min-w-[80px] justify-end">
+        <div className="flex items-center min-w-[80px] justify-end z-10">
           {user ? (
             <motion.button
               whileHover={{ scale: 1.08 }}
