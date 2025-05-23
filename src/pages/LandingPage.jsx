@@ -99,7 +99,7 @@ const LandingPage = () => {
       {/* FOOTER */}
       <footer className="bg-green-800 text-white py-4 sm:py-6 mt-8 flex flex-col items-center text-xs sm:text-sm">
         <div className="flex items-center gap-2 sm:gap-4 mb-1 sm:mb-2">
-          <a href="https://instagram.com/fuegodeagua" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-xl sm:text-2xl">
+          <a href="https://www.instagram.com/fuegodeagua.co/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors text-xl sm:text-2xl">
             <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5 sm:w-7 sm:h-7 inline"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5zm6 1.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
           </a>
           <span className="text-xs sm:text-sm">@fuegodeagua</span>
