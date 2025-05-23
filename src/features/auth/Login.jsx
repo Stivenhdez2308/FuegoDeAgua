@@ -115,28 +115,28 @@ const Login = () => {
             ¿Olvidaste tu contraseña?
           </button>
         </div>
-        {showReset && (
-          <form onSubmit={handleReset} className="mt-3 flex flex-col gap-2 animate-fade-in">
-            <label htmlFor="resetEmail" className="text-green-900 font-medium text-sm">Ingresa tu correo para recuperar tu contraseña</label>
-            <input
-              id="resetEmail"
-              type="email"
-              placeholder="correo@ejemplo.com"
-              value={resetEmail}
-              onChange={e => setResetEmail(e.target.value)}
-              className="border border-green-200 p-2 rounded focus:ring-2 focus:ring-green-200 transition-all"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-green-600 text-white py-1 rounded-full font-bold hover:bg-green-700 transition-colors"
-            >
-              Enviar correo de recuperación
-            </button>
-            {resetMsg && <p className={`text-center text-sm ${resetMsg.startsWith('¡') ? 'text-green-700' : 'text-red-500'}`}>{resetMsg}</p>}
-          </form>
-        )}
       </form>
+      {showReset && (
+        <form onSubmit={handleReset} className="mt-3 flex flex-col gap-2 animate-fade-in bg-white p-6 rounded-2xl shadow-xl w-full max-w-sm">
+          <label htmlFor="resetEmail" className="text-green-900 font-medium text-sm">Ingresa tu correo para recuperar tu contraseña</label>
+          <input
+            id="resetEmail"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            value={resetEmail}
+            onChange={e => setResetEmail(e.target.value)}
+            className="border border-green-200 p-2 rounded focus:ring-2 focus:ring-green-200 transition-all"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-green-600 text-white py-1 rounded-full font-bold hover:bg-green-700 transition-colors"
+          >
+            Enviar correo de recuperación
+          </button>
+          {resetMsg && <p className={`text-center text-sm ${resetMsg.startsWith('¡') ? 'text-green-700' : 'text-red-500'}`}>{resetMsg}</p>}
+        </form>
+      )}
     </div>
   );
 };
