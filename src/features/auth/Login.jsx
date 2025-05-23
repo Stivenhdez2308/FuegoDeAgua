@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showReset, setShowReset] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetMsg, setResetMsg] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -35,6 +38,22 @@ const Login = () => {
       setError('Error al iniciar sesión con Google');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleReset = async (e) => {
+    e.preventDefault();
+    setResetMsg('');
+    setError('');
+    if (!resetEmail) {
+      setResetMsg('Por favor ingresa tu correo.');
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      setResetMsg('¡Correo de recuperación enviado! Revisa tu bandeja de entrada.');
+    } catch (err) {
+      setResetMsg('No se pudo enviar el correo. ¿El correo está registrado?');
     }
   };
 
@@ -87,6 +106,36 @@ const Login = () => {
           Entrar con Google
         </button>
         <p className="text-sm mt-2 text-center">¿No tienes cuenta? <a href="/register" className="text-green-700 underline">Regístrate</a></p>
+        <div className="text-center mt-2">
+          <button
+            type="button"
+            className="text-green-700 underline text-sm hover:text-green-900 transition-colors"
+            onClick={() => setShowReset(!showReset)}
+          >
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
+        {showReset && (
+          <form onSubmit={handleReset} className="mt-3 flex flex-col gap-2 animate-fade-in">
+            <label htmlFor="resetEmail" className="text-green-900 font-medium text-sm">Ingresa tu correo para recuperar tu contraseña</label>
+            <input
+              id="resetEmail"
+              type="email"
+              placeholder="correo@ejemplo.com"
+              value={resetEmail}
+              onChange={e => setResetEmail(e.target.value)}
+              className="border border-green-200 p-2 rounded focus:ring-2 focus:ring-green-200 transition-all"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-green-600 text-white py-1 rounded-full font-bold hover:bg-green-700 transition-colors"
+            >
+              Enviar correo de recuperación
+            </button>
+            {resetMsg && <p className={`text-center text-sm ${resetMsg.startsWith('¡') ? 'text-green-700' : 'text-red-500'}`}>{resetMsg}</p>}
+          </form>
+        )}
       </form>
     </div>
   );

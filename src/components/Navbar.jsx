@@ -27,34 +27,33 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white/95 shadow-sm border-b border-green-100 sticky top-0 z-50 w-full">
-      {/* Mobile: flex, Desktop: grid */}
-      <div className="max-w-7xl mx-auto flex md:grid md:grid-cols-3 items-center px-2 sm:px-6 py-2 sm:py-3 gap-2">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-6 py-2 sm:py-3 gap-2">
         {/* Logo */}
-        <div className="flex items-center min-w-[60px] justify-start">
+        <div className="flex items-center min-w-[60px] justify-start flex-shrink-0">
           <Link to="/" className="flex items-center gap-2">
             <img src="/Logo.jpg" alt="Logo Fuego de Agua" className="w-10 h-10 rounded-full object-cover border-2 border-green-200 shadow-sm" />
           </Link>
         </div>
         {/* Links - desktop */}
-        <div className="hidden md:flex flex-row justify-center items-center gap-1 sm:gap-4">
+        <div className="hidden md:flex flex-row justify-center items-center w-full">
           {navLinks.filter(l => l.always || (l.auth && user)).map(l => (
-            <NavLinkItem key={l.to} to={l.to} label={l.label} location={location} onClick={() => setMenuOpen(false)} />
+            <NavLinkItem key={l.to} to={l.to} label={l.label} location={location} onClick={() => setMenuOpen(false)} flex />
           ))}
         </div>
         {/* Auth button & hamburger */}
-        <div className="flex items-center min-w-[100px] justify-end z-10 gap-2 ml-auto">
+        <div className="flex items-center min-w-[100px] justify-end z-10 gap-2 ml-2 flex-shrink-0">
           {/* Auth button */}
           {user ? (
             <motion.button
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleLogout}
-              className="text-red-600 font-bold px-3 py-1 rounded hover:bg-red-100 transition-colors duration-200"
+              className="text-red-600 font-bold px-4 py-1 rounded-full hover:bg-red-100 transition-colors duration-200 shadow-sm border border-red-100"
             >
               Salir
             </motion.button>
           ) : (
-            <Link to="/login" className="text-green-700 font-bold px-3 py-1 rounded hover:bg-green-100 transition-colors duration-200">Entrar</Link>
+            <Link to="/login" className="text-green-700 font-bold px-4 py-1 rounded-full hover:bg-green-100 transition-colors duration-200 shadow-sm border border-green-100">Entrar</Link>
           )}
           {/* Hamburger - mobile only, a la derecha */}
           <button
@@ -87,15 +86,15 @@ const Navbar = () => {
   );
 };
 
-function NavLinkItem({ to, label, location, onClick }) {
+function NavLinkItem({ to, label, location, onClick, flex }) {
   const isActive = location.pathname === to;
   return (
     <Link
       to={to}
       onClick={onClick}
-      className={`relative px-2 py-1 text-base sm:text-lg font-bold font-[Montserrat,sans-serif] transition-colors duration-200 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400
-        ${isActive ? 'text-yellow-700' : 'text-green-800 hover:text-green-900 hover:bg-green-50'}`}
-      style={{ minWidth: 60, textAlign: 'center' }}
+      className={`relative px-4 py-1 text-base sm:text-lg font-bold font-[Montserrat,sans-serif] transition-colors duration-200 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 flex items-center justify-center
+        ${isActive ? 'text-yellow-700 bg-green-50 shadow' : 'text-green-800 hover:text-green-900 hover:bg-green-50'} ${flex ? 'flex-1 mx-1' : ''}`}
+      style={{ minWidth: 100, textAlign: 'center' }}
     >
       {label}
       {isActive && (

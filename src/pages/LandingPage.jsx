@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../features/auth/AuthProvider';
 
 const productos = [
   {
@@ -26,8 +27,17 @@ const aliados = [
 ];
 
 const LandingPage = () => {
+  const { user } = useAuth();
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-100 to-white flex flex-col">
+      {/* MENSAJE DE BIENVENIDA */}
+      {user && user.displayName && (
+        <div className="w-full flex justify-center animate-fade-in">
+          <div className="bg-green-100 border border-green-300 text-green-900 rounded-full px-6 py-2 mt-4 mb-2 shadow font-semibold text-lg">
+            ¡Bienvenido/a, {user.displayName}!
+          </div>
+        </div>
+      )}
       {/* HERO */}
       <section className="flex flex-col items-center justify-center py-10 sm:py-14 md:py-16 px-2 sm:px-4 text-center">
         <div className="mb-4 sm:mb-6 animate-bounce-slow">
