@@ -4,6 +4,7 @@ import { db } from '../../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../auth/AuthProvider';
 import { motion } from 'framer-motion';
+import PersonalizadorOso from '../../components/PersonalizadorOso';
 
 const SUGGESTED_TOPICS = [
   'Día de la Madre',
@@ -72,13 +73,25 @@ const CustomizerForm = ({ onSave }) => {
       transition={{ duration: 0.7 }}
     >
       <motion.div
-        className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center border border-green-100"
+        className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center border border-green-100 relative"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6, type: 'spring' }}
         whileHover={{ scale: 1.03 }}
       >
-        <PreviewCandle {...form} />
+        {form.model === 'oso-gigante' && (
+          <img
+            src={'/Oso Gigante.png'}
+            alt="Oso Gigante real"
+            className="absolute top-2 right-2 w-20 h-20 object-contain rounded-xl shadow-md border border-gray-200 bg-white/80 z-10"
+            style={{ pointerEvents: 'none' }}
+          />
+        )}
+        {form.model === 'oso-gigante' ? (
+          <PersonalizadorOso />
+        ) : (
+          <PreviewCandle {...form} />
+        )}
       </motion.div>
       <motion.form
         onSubmit={handleSubmit}
@@ -92,17 +105,22 @@ const CustomizerForm = ({ onSave }) => {
             <option value="classic">Clásica</option>
             <option value="square">Cuadrada</option>
             <option value="round">Redonda</option>
+            <option value="oso-gigante">Oso Gigante</option>
           </select>
         </label>
-        <label className="font-semibold text-green-800">Color de la cera:
-          <input type="color" name="waxColor" value={form.waxColor} onChange={handleChange} className="w-12 h-8 p-0 border-none ml-2 align-middle" />
-        </label>
-        <label className="font-semibold text-green-800">Color del recipiente:
-          <input type="color" name="containerColor" value={form.containerColor} onChange={handleChange} className="w-12 h-8 p-0 border-none ml-2 align-middle" />
-        </label>
-        <label className="font-semibold text-green-800">Texto personalizado:
-          <input type="text" name="text" value={form.text} onChange={handleChange} maxLength={20} className="border p-2 rounded w-full mt-1" placeholder="Tu mensaje" />
-        </label>
+        {form.model !== 'oso-gigante' && (
+          <>
+            <label className="font-semibold text-green-800">Color de la cera:
+              <input type="color" name="waxColor" value={form.waxColor} onChange={handleChange} className="w-12 h-8 p-0 border-none ml-2 align-middle" />
+            </label>
+            <label className="font-semibold text-green-800">Color del recipiente:
+              <input type="color" name="containerColor" value={form.containerColor} onChange={handleChange} className="w-12 h-8 p-0 border-none ml-2 align-middle" />
+            </label>
+            <label className="font-semibold text-green-800">Texto personalizado:
+              <input type="text" name="text" value={form.text} onChange={handleChange} maxLength={20} className="border p-2 rounded w-full mt-1" placeholder="Tu mensaje" />
+            </label>
+          </>
+        )}
         <label className="font-semibold text-green-800">Temática:
           <select name="topic" value={form.topic} onChange={handleChange} className="border p-2 rounded w-full mt-1">
             <option value="">Selecciona una temática</option>
